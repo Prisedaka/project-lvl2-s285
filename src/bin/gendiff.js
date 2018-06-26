@@ -12,4 +12,3 @@ commander
     return gendiff(firstConfigValue, secondConfigValue);
   })
   .parse(process.argv);
-//gendiff();

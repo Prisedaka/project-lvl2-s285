@@ -8,5 +8,5 @@ const pathToResult = './__tests__/__fixtures__/result.json';
 const diff = genDiff(pathToFile1, pathToFile2);
 const expected = fs.readFileSync(pathToResult, 'utf8');
 test('differences', () => {
-  expect(diff).toBe(expected);
+  expect(diff).toBe(JSON.parse(expected));
 });
