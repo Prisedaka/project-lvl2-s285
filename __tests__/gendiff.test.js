@@ -1,10 +1,12 @@
-import genDiff from '../src/bin/gendiff';
+import fs from 'fs';
+import genDiff from '../src/';
 
-const pathToFile1 = 'after.json';
-const pathToFile2 = 'before.json';
+const pathToFile1 = './__tests__/__fixtures__/after.json';
+const pathToFile2 = './__tests__/__fixtures__/before.json';
+const pathToResult = './__tests__/__fixtures__/result.json';
 
 const diff = genDiff(pathToFile1, pathToFile2);
-const expected = '{host: hexlet.io + timeout: 20 - timeout: 50 - proxy: 123.234.53.22 + verbose: true - follow: false}';
+const expected = fs.readFileSync(pathToResult, 'utf8');
 test('differences', () => {
   expect(diff).toBe(expected);
 });
