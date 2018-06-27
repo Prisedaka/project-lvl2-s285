@@ -2,11 +2,13 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import { safeLoad } from 'js-yaml';
+import { parse } from 'ini';
 
 const parsers = {
   '.json': JSON.parse,
   '.yaml': safeLoad,
   '.yml': safeLoad,
+  '.ini': parse,
 };
 const gendiff = (path1, path2) => {
   const format1 = path.extname(path1);
