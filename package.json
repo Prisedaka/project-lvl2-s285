@@ -1,6 +1,6 @@
 {
   "name": "gendiff_prisedaka",
-  "version": "1.0.25",
+  "version": "1.0.27",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -39,7 +39,9 @@
     "readline-sync": "*",
     "commander": "*",
     "lodash": "^4.17.10",
-    "fs": "*"
+    "fs": "*",
+    "js-yaml": "^3.12.0",
+    "path": "^0.12.7"
   },
   "bin": {
     "gendiff": "dist/bin/gendiff.js"

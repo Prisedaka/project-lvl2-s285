@@ -27,6 +27,5 @@ lint:
 
 .PHONY: test
 
-pubinst:
-	npm publish
+install-pack:
 	sudo npm -g install gendiff_prisedaka
