@@ -1,7 +1,7 @@
 install: install-deps install-flow-typed
 
 run:
-	npm run babel-node -- 'src/bin/gendiff.js' 10
+	npm run babel-node -- 'src/bin/gendiff.js'
 
 install-deps:
 	npm install
@@ -26,3 +26,7 @@ lint:
 	npm run eslint .
 
 .PHONY: test
+
+pubinst:
+	npm publish
+	sudo npm -g install gendiff_prisedaka
