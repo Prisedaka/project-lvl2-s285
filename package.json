@@ -1,10 +1,6 @@
 {
   "name": "gendiff_prisedaka",
-<<<<<<< HEAD
-  "version": "1.0.22",
-=======
-  "version": "1.0.24",
->>>>>>> ade23760f9841f4c775ed7b7511319eed4733348
+  "version": "1.0.25",
   "main": "index.js",
   "scripts": {
     "test": "jest",
