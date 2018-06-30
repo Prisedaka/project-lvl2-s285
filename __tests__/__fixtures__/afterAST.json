@@ -1,6 +1,6 @@
 {
-    "follow": false,
     "common": {
+        "follow": true,
         "setting1": "Value 1",
         "setting3": {
             "key": "value"
