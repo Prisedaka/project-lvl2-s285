@@ -35,7 +35,7 @@ const propertyActions = [
 ];
 const makeAst = (firstConfig = {}, secondConfig = {}) => {
   const configsKeys = _.union(Object.keys(firstConfig), Object.keys(secondConfig));
-  return configsKeys.map((key) => {
+  const ast = configsKeys.map((key) => {
     const { type, process } = _.find(propertyActions, item => item.check(firstConfig, secondConfig, key));
     const children = (type === 'nested') ? process(firstConfig[key], secondConfig[key], makeAst) : [];
     const value = (type === 'nested') ? '' : process(firstConfig[key], secondConfig[key]);
@@ -43,6 +43,7 @@ const makeAst = (firstConfig = {}, secondConfig = {}) => {
       name: key, type, value, children,
     };
   });
+  return ast;
 };
 const selection = (val, func, space) => {
   if (val instanceof Array) return func(val, space + 2);
@@ -64,48 +65,45 @@ const renderDefault = (ast, space) => {
         break;
       case 'changed':
         return `${tab}- ${elem.name}: ${selection(elem.value.old, renderDefault, space)}\n${tab}+ ${elem.name}: ${selection(elem.value.new, renderDefault, space)}`;
+        break;
       case 'deleted':
         return `${tab}- ${elem.name}: ${selection(elem.value, renderDefault, space)}`;
         break;
       default:
         return `${tab}  ${Object.keys(elem)[0]}: ${elem[Object.keys(elem)[0]]}`;
     }
-  }).join('\n');
-  return `{\n${diff}\n${' '.repeat(space - 2)}}`;
+  });
+  return `{\n${diff.join('\n')}\n${' '.repeat(space - 2)}}`;
 };
-// const selectionPlain = (val, func, space) => {
-//   if (val instanceof Array) return func(val, space + 2);
-//   else if (val instanceof Object) return func([val], space + 2);
-//   return val;
-// };
-// const renderPlain = (ast) => {
-//   const diff = ast.map((elem) => {
-//     switch (elem.type) {
-//       case 'nested':
-//         return selection(elem.children, renderDefault);
-//         break;
-//       case 'inserted':
-//         return `Property${elem.name} was added with value ${selection(elem.value, renderDefault, space)}`;
-//         break;
-//       case 'not changed':
-//         return `${tab}  ${elem.name}: ${selection(elem.value, renderDefault, space)}`;
-//         break;
-//       case 'changed':
-//         return `${tab}- ${elem.name}: ${selection(elem.value.old, renderDefault, space)}\n${tab}+ ${elem.name}: ${selection(elem.value.new, renderDefault, space)}`;
-//       case 'deleted':
-//         return `${tab}- ${elem.name}: ${selection(elem.value, renderDefault, space)}`;
-//         break;
-//       default:
-//         return `${tab}  ${Object.keys(elem)[0]}: ${elem[Object.keys(elem)[0]]}`;
-//     }
-//   }).join('\n');
-//   return `{\n${diff}\n${' '.repeat(space - 2)}}`;
-// };
-// const getRender = (format, render1, render2) => {
-//   if (format === 'plain') return renderDefault(astDiff, 2);
-// }
+const selectValue = (val) => {
+  if (val instanceof Object) return ' complex value';
+  return ` value '${val}'`;
+};
+const renderPlain = (ast, pathCategory) => {
+  const diff = ast.map((elem) => {
+    const fullPathCategory = `${pathCategory}${pathCategory === '' ? '' : '.'}${elem.name}`;
+    switch (elem.type) {
+      case 'nested':
+        return renderPlain(elem.children, fullPathCategory);
+        break;
+      case 'inserted':
+        return `Property '${fullPathCategory}' was added with${selectValue(elem.value)}\n`;
+        break;
+      case 'not changed':
+        return '';
+        break;
+      case 'changed':
+        return `Property '${fullPathCategory}' was updated. From${selectValue(elem.value.old)} to${selectValue(elem.value.new)}\n`;
+      case 'deleted':
+        return `Property '${fullPathCategory}' was removed\n`;
+        break;
+      default:
+        return '';
+    }
+  }).join('');
+  return diff;
+};
 const gendiff = (path1, path2, format) => {
-  // console.log(format);
   const format1 = path.extname(path1);
   const format2 = path.extname(path2);
   const data1 = fs.readFileSync(path1, 'utf8');
@@ -113,7 +111,7 @@ const gendiff = (path1, path2, format) => {
   const obj1 = getParser(format1)(data1);
   const obj2 = getParser(format2)(data2);
   const astDiff = makeAst(obj1, obj2);
-  //if (format === 'plain') return renderPlain(astDiff);
+  if (format === 'plain') return renderPlain(astDiff, '');
   return renderDefault(astDiff, 2);
 };
 export default gendiff;
