@@ -10,7 +10,7 @@ export default format => (data) => {
   };
   const parsed = parsers[format];
   if (!parsed) {
-    throw new Error(`unknown format: ${format}`);
+    throw new Error(`unknown input format: ${format}`);
   }
   return parsed(data);
 };
