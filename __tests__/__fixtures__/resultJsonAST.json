@@ -1,34 +1,121 @@
-{
-  "  common": {
-    "  setting1": "Value 1",
-    "- setting2": "200",
-    "- setting3": "true",
-    "+ setting3": {
-      "  key": "value"
+[
+  {
+   "name": "common",
+   "type": "nested",
+   "value": "",
+   "children": [
+    {
+     "name": "setting1",
+     "type": "not changed",
+     "value": "Value 1",
+     "children": []
     },
-    "  setting6": {
-      "  key": "value",
-      "+ ops": "vops"
+    {
+     "name": "setting2",
+     "type": "deleted",
+     "value": "200",
+     "children": []
     },
-    "+ follow": "true",
-    "+ setting4": "blah blah",
-    "+ setting5": {
-      "  key5": "value5"
+    {
+     "name": "setting3",
+     "type": "changed",
+     "value": {
+      "old": true,
+      "new": {
+       "key": "value"
+      }
+     },
+     "children": []
+    },
+    {
+     "name": "setting6",
+     "type": "nested",
+     "value": "",
+     "children": [
+      {
+       "name": "key",
+       "type": "not changed",
+       "value": "value",
+       "children": []
+      },
+      {
+       "name": "ops",
+       "type": "inserted",
+       "value": "vops",
+       "children": []
+      }
+     ]
+    },
+    {
+     "name": "follow",
+     "type": "inserted",
+     "value": true,
+     "children": []
+    },
+    {
+     "name": "setting4",
+     "type": "inserted",
+     "value": "blah blah",
+     "children": []
+    },
+    {
+     "name": "setting5",
+     "type": "inserted",
+     "value": {
+      "key5": "value5"
+     },
+     "children": []
     }
+   ]
   },
-  "  group1": {
-    "- baz": "bas",
-    "+ baz": "bars",
-    "  foo": "bar",
-    "- nest": {
-      "  key": "value"
+  {
+   "name": "group1",
+   "type": "nested",
+   "value": "",
+   "children": [
+    {
+     "name": "baz",
+     "type": "changed",
+     "value": {
+      "old": "bas",
+      "new": "bars"
+     },
+     "children": []
     },
-    "+ nest": "str"
+    {
+     "name": "foo",
+     "type": "not changed",
+     "value": "bar",
+     "children": []
+    },
+    {
+     "name": "nest",
+     "type": "changed",
+     "value": {
+      "old": {
+       "key": "value"
+      },
+      "new": "str"
+     },
+     "children": []
+    }
+   ]
   },
-  "- group2": {
-    "  abc": "12345"
+  {
+   "name": "group2",
+   "type": "deleted",
+   "value": {
+    "abc": "12345",
+    "fog": "frog"
+   },
+   "children": []
   },
-  "+ group3": {
-    "  fee": "100500"
+  {
+   "name": "group3",
+   "type": "inserted",
+   "value": {
+    "fee": "100500"
+   },
+   "children": []
   }
-}
+ ]

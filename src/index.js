@@ -9,43 +9,36 @@ const propertyActions = [
     type: 'nested',
     check: (first, second, key) => (first[key] instanceof Object && second[key] instanceof Object)
       && !(first[key] instanceof Array && second[key] instanceof Array),
-    process: (first, second, fun) => fun(first, second),
-    typeValue: 'children',
+    process: (first, second, fun, key) => ({ name: key, type: 'nested', value: '', children: fun(first, second) }),
   },
   {
     type: 'not changed',
     check: (first, second, key) => (_.has(first, key) && _.has(second, key)
       && (first[key] === second[key])),
-    process: first => _.identity(first),
-    typeValue: 'value',
+    process: (first, second, fun, key) => ({ name: key, type: 'not changed', value: _.identity(first), children: [] }),
   },
   {
     type: 'changed',
     check: (first, second, key) => (_.has(first, key) && _.has(second, key)
       && (first[key] !== second[key])),
-    process: (first, second) => ({ old: first, new: second }),
-    typeValue: 'value',
+    process: (first, second, fun, key) => ({ name: key, type: 'changed', value: { old: first, new: second }, children: [] }),
   },
   {
     type: 'deleted',
     check: (first, second, key) => (_.has(first, key) && !_.has(second, key)),
-    process: first => _.identity(first),
-    typeValue: 'value',
+    process: (first, second, fun, key) => ({ name: key, type: 'deleted', value: _.identity(first), children: [] }),
   },
   {
     type: 'inserted',
     check: (first, second, key) => (!_.has(first, key) && _.has(second, key)),
-    process: (first, second) => _.identity(second),
-    typeValue: 'value',
+    process: (first, second, fun, key) => ({ name: key, type: 'inserted', value: _.identity(second), children: [] }),
   },
 ];
 const makeAst = (firstConfig = {}, secondConfig = {}) => {
   const configsKeys = _.union(Object.keys(firstConfig), Object.keys(secondConfig));
   const ast = configsKeys.map((key) => {
-    const { type, process, typeValue } = _.find(propertyActions, item => item.check(firstConfig, secondConfig, key));
-    return {
-      name: key, type, [typeValue]: process(firstConfig[key], secondConfig[key], makeAst),
-    };
+    const obj = _.find(propertyActions, item => item.check(firstConfig, secondConfig, key));
+    return { ...obj.process(firstConfig[key], secondConfig[key], makeAst, key) };
   });
   return ast;
 };
