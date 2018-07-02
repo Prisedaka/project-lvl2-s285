@@ -6,7 +6,7 @@ test('differences defaultForm json', () => {
   const pathToFile2 = './__tests__/__fixtures__/afterAST.json';
   const pathToResult = './__tests__/__fixtures__/resultAST';
   const expected = fs.readFileSync(pathToResult, 'utf8');
-  const diff = genDiff(pathToFile1, pathToFile2);
+  const diff = genDiff(pathToFile1, pathToFile2, 'struct');
   expect(diff).toBe(expected);
 });
 test('differences defaultForm yml', () => {
@@ -14,7 +14,7 @@ test('differences defaultForm yml', () => {
   const pathToFile2 = './__tests__/__fixtures__/afterAST.yml';
   const pathToResult = './__tests__/__fixtures__/resultAST';
   const expected = fs.readFileSync(pathToResult, 'utf8');
-  const diff = genDiff(pathToFile1, pathToFile2);
+  const diff = genDiff(pathToFile1, pathToFile2, 'struct');
   expect(diff).toBe(expected);
 });
 test('differences defaultForm ini', () => {
@@ -22,7 +22,7 @@ test('differences defaultForm ini', () => {
   const pathToFile2 = './__tests__/__fixtures__/afterAST.ini';
   const pathToResult = './__tests__/__fixtures__/resultAST';
   const expected = fs.readFileSync(pathToResult, 'utf8');
-  const diff = genDiff(pathToFile1, pathToFile2);
+  const diff = genDiff(pathToFile1, pathToFile2, 'struct');
   expect(diff).toBe(expected);
 });
 test('differences plainForm json', () => {

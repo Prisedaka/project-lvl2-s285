@@ -27,6 +27,7 @@
   }
   - group2: {
       abc: 12345
+      fog: frog
   }
   + group3: {
       fee: 100500

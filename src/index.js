@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import getParser from './parsers';
-import getRenderer from './renderer/renderer';
+import getRenderer from './renderers/renderer';
 
 const propertyActions = [
   {
@@ -57,6 +57,7 @@ const gendiff = (path1, path2, formatOut) => {
   const obj1 = getParser(formatIn1)(data1);
   const obj2 = getParser(formatIn2)(data2);
   const astDiff = makeAst(obj1, obj2);
+  // console.log(astDiff);
   return getRenderer(formatOut)(astDiff);
 };
 export default gendiff;
