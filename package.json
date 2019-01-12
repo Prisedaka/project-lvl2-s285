@@ -1,9 +1,9 @@
 {
   "name": "gendiff_prisedaka",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --color --watchAll",
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
@@ -50,5 +50,13 @@
   "files": [
     "dist"
   ],
-  "description": ""
+  "description": "<a href=\"https://codeclimate.com/github/Prisedaka/project-lvl2-s285/maintainability\"><img src=\"https://api.codeclimate.com/v1/badges/6ca15152e1d36a8bee14/maintainability\" /></a> [![Build Status](https://travis-ci.org/Prisedaka/project-lvl2-s285.svg?branch=master)](https://travis-ci.org/Prisedaka/project-lvl2-s285)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prisedaka/project-lvl2-s285.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Prisedaka/project-lvl2-s285/issues"
+  },
+  "homepage": "https://github.com/Prisedaka/project-lvl2-s285#readme"
 }
