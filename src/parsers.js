@@ -1,16 +1,14 @@
-import { safeLoad } from 'js-yaml';
-import ini from 'ini';
+import _ from 'lodash';
 
-export default format => (data) => {
-  const parsers = {
-    '.json': JSON.parse,
-    '.yaml': safeLoad,
-    '.yml': safeLoad,
-    '.ini': ini.parse,
-  };
-  const parsed = parsers[format];
-  if (!parsed) {
-    throw new Error(`unknown input format: ${format}`);
-  }
-  return parsed(data);
+/*
+1 определить формат файла по его расширению
+2 вызвать нужный парсер
+*/
+const parsers = {
+  json: 'json.parse',
+  yml: 'yaml.safeload',
+};
+export default (path) => {
+  const format = _.path.extname(path);
+
 };

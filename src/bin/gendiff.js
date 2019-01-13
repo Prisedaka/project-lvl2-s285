@@ -5,8 +5,9 @@ import gendiff from '../';
 
 commander
   .version(JSON.parse(fs.readFileSync('./package.json', 'utf8')).version)
+  .description('Compares two configuration files and shows a difference.')
+  .option('-f, --format [type]', 'Output format')
   .arguments('<firstConfig> <secondConfig>')
-  .option('-f, --format [type]', 'output format', 'struct')
-  .action((firstConfig, secondConfig) =>
-    console.log(gendiff(firstConfig, secondConfig, commander.format)))
-  .parse(process.argv);
+  .action((firstConfig, secondConfig) => console.log(gendiff(firstConfig, secondConfig)));
+
+commander.parse(process.argv);
