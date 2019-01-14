@@ -49,7 +49,7 @@
     {
      "name": "follow",
      "type": "inserted",
-     "value": true,
+     "value": false,
      "children": []
     },
     {
