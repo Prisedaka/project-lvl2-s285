@@ -1,6 +1,6 @@
 import fs from 'fs';
 import _ from 'lodash';
-import parse from './parsers';
+import parsed from './parsers';
 
 /*
 1 считать данные из двух файлов
@@ -11,8 +11,8 @@ import parse from './parsers';
 */
 
 export default (path1, path2) => {
-  const objectFromFile1 = JSON.parse(fs.readFileSync(path1, 'utf8'));
-  const objectFromFile2 = JSON.parse(fs.readFileSync(path2, 'utf8'));
+  const objectFromFile1 = parsed(path1);
+  const objectFromFile2 = parsed(path2);
   const unionArray = _.union(Object.keys(objectFromFile1), Object.keys(objectFromFile2));
   const result = unionArray.map((elem) => {
     if (_.has(objectFromFile1, elem) && _.has(objectFromFile2, elem)
