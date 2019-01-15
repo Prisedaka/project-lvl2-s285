@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import fs from 'fs';
 import commander from 'commander';
 import gendiff from '../';

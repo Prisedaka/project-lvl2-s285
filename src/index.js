@@ -1,4 +1,4 @@
-import fs from 'fs';
+// import fs from 'fs';
 import _ from 'lodash';
 import parsed from './parsers';
 
@@ -15,10 +15,10 @@ export default (path1, path2) => {
   const objectFromFile2 = parsed(path2);
   const unionArray = _.union(Object.keys(objectFromFile1), Object.keys(objectFromFile2));
   const result = unionArray.map((elem) => {
-    if (_.has(objectFromFile1, elem) && _.has(objectFromFile2, elem)
-    && objectFromFile1[elem] === objectFromFile2[elem]) return `    ${elem}: ${objectFromFile1[elem]}`;
-    if (_.has(objectFromFile1, elem) && _.has(objectFromFile2, elem)
-    && objectFromFile1[elem] !== objectFromFile2[elem]) return `  + ${elem}: ${objectFromFile2[elem]}\n  - ${elem}: ${objectFromFile1[elem]}`;
+    if (_.has(objectFromFile1, elem) && _.has(objectFromFile2, elem) &&
+      objectFromFile1[elem] === objectFromFile2[elem]) return `    ${elem}: ${objectFromFile1[elem]}`;
+    if (_.has(objectFromFile1, elem) && _.has(objectFromFile2, elem) &&
+      objectFromFile1[elem] !== objectFromFile2[elem]) return `  + ${elem}: ${objectFromFile2[elem]}\n  - ${elem}: ${objectFromFile1[elem]}`;
     if (_.has(objectFromFile1, elem)) return `  - ${elem}: ${objectFromFile1[elem]}`;
     return `  + ${elem}: ${objectFromFile2[elem]}`;
   });

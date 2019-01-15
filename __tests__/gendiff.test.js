@@ -27,9 +27,9 @@ test('differences of plain INI', () => {
   const diff = genDiff(pathToFile1, pathToFile2);
   expect(diff).toBe(expected);
 });
-/*
+
 // default
-test('differences defaultForm json', () => {
+test('differences defaultForm JSON', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.json';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.json';
   const pathToResult = './__tests__/__fixtures__/resultAST';
@@ -37,6 +37,7 @@ test('differences defaultForm json', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'struct');
   expect(diff).toBe(expected);
 });
+/*
 test('differences defaultForm yml', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.yml';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.yml';
