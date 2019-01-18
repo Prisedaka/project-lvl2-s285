@@ -50,7 +50,9 @@ const getPropertyAction = arg => find(propertyActions, ({
 }) => check(arg));
 
 const makeAST = (data1, data2) => {
-  const unionArray = _.union(Object.keys(data1), Object.keys(data2));
+  const keysObject1 = Object.keys(data1);
+  const keysObject2 = Object.keys(data2);
+  const unionArray = _.union(keysObject1, keysObject2);
   const root = {
     name: '',
     type: '',
@@ -59,7 +61,7 @@ const makeAST = (data1, data2) => {
     children: [],
   }
   return unionArray.reduce((acc, arg) => {
-
+    const { type, process } = getPropertyAction(arg);
   }, root);
 };
 
