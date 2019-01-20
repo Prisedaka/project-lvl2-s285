@@ -1,6 +1,6 @@
 // import fs from 'fs';
 import _ from 'lodash';
-import parsed from './parsers';
+import parse from './parsers';
 
 /*
 1 считать данные из двух файлов
@@ -25,48 +25,65 @@ import parsed from './parsers';
 //   return `{\n${result.join('\n')}\n}`;
 // };
 
-const propertyActions = [{
-    // two objects
+const propertyActions = [
+  {
     type: 'nested',
-    check: process:
+    check: (arg, obj1, obj2) => _.has(obj1, arg) &&
+      _.has(obj2, arg) &&
+      obj1[arg] instanceof Object &&
+      obj2[arg] instanceof Object &&
+      !(obj1[arg] instanceof Array) &&
+      !(obj2[arg] instanceof Array),
+    process: (arg, obj1, obj2, func) => ({ oldValue: obj1[arg], newValue: obj2[arg] }),
+  },
+  {
+    type: 'edit',
+    check: (arg, obj1, obj2) => _.has(obj1, arg) && _.has(obj2, arg) && obj1[arg] !== obj2[arg],
+    process: (arg, obj1, obj2) => ({ oldValue: obj1[arg], newValue: obj2[arg] }),
   },
   {
     type: 'delete',
-    check: process:
+    check: (arg, obj1, obj2) => _.has(obj1, arg) && !_.has(obj2, arg),
+    process: (arg, obj1, obj2) => ({ oldValue: obj1[arg], newValue: obj2[arg] }),
   },
   {
     type: 'include',
-    check: process:
+    check: (arg, obj1, obj2) => !_.has(obj1, arg) && _.has(obj2, arg),
+    process: (arg, obj1, obj2) => ({ oldValue: obj1[arg], newValue: obj2[arg] }),
   },
-  // different types of elements
   {
     type: 'same',
-    check: process:
+    check: (arg, obj1, obj2) => _.has(obj1, arg) && _.has(obj2, arg) && obj1[arg] === obj2[arg],
+    process: (arg, obj1, obj2) => ({ oldValue: obj1[arg], newValue: obj2[arg] }),
   },
 ];
 
-const getPropertyAction = arg => find(propertyActions, ({
-  check
-}) => check(arg));
+const getPropertyAction = (arg, obj1, obj2) => _.find(propertyActions, ({
+  check,
+}) => check(arg, obj1, obj2));
 
 const makeAST = (data1, data2) => {
   const keysObject1 = Object.keys(data1);
   const keysObject2 = Object.keys(data2);
   const unionArray = _.union(keysObject1, keysObject2);
-  const root = {
-    name: '',
-    type: '',
-    oldValue: '',
-    newValue: '',
-    children: [],
-  }
-  return unionArray.reduce((acc, arg) => {
-    const { type, process } = getPropertyAction(arg);
-  }, root);
+  // const root = {
+  //   name: '',
+  //   type: '',
+  //   oldValue: '',
+  //   newValue: '',
+  //   children: [],
+  // };
+  return unionArray.map((arg) => {
+    const {
+      type,
+      process,
+    } = getPropertyAction(arg, data1, data2);
+    return { name: arg, type, ...process(arg, data1, data2, makeAST) };
+  });
 };
 
 export default (path1, path2) => {
-  const objectFromFile1 = parsed(path1);
-  const objectFromFile2 = parsed(path2);
+  const objectFromFile1 = parse(path1);
+  const objectFromFile2 = parse(path2);
   return makeAST(objectFromFile1, objectFromFile2);
-}
+};
