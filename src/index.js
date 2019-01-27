@@ -1,6 +1,7 @@
 // import fs from 'fs';
 import _ from 'lodash';
 import parse from './parsers';
+import renderToStructFormat from './renderers/renderStruct';
 
 /*
 1 считать данные из двух файлов
@@ -34,7 +35,7 @@ const propertyActions = [
       obj2[arg] instanceof Object &&
       !(obj1[arg] instanceof Array) &&
       !(obj2[arg] instanceof Array),
-    process: (arg, obj1, obj2, func) => ({ oldValue: obj1[arg], newValue: obj2[arg] }),
+    process: (arg, obj1, obj2, func) => ({ children: func(obj1[arg], obj2[arg]) }),
   },
   {
     type: 'edit',
@@ -85,5 +86,6 @@ const makeAST = (data1, data2) => {
 export default (path1, path2) => {
   const objectFromFile1 = parse(path1);
   const objectFromFile2 = parse(path2);
-  return makeAST(objectFromFile1, objectFromFile2);
+  const ast = makeAST(objectFromFile1, objectFromFile2);
+  return renderToStructFormat(ast);
 };

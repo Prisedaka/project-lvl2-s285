@@ -3,14 +3,14 @@ import genDiff from '../src/';
 
 // для тестирования запуска приложения
 // /home/prisedaka/Projects/project-lvl2-s285/dist/bin/gendiff.js /home/prisedaka/Projects/project-lvl2-s285/__tests__/__fixtures__/before.json /home/prisedaka/Projects/project-lvl2-s285/__tests__/__fixtures__/after.json
-test('differences of plain JSON', () => {
-  const pathToFile1 = './__tests__/__fixtures__/before.json';
-  const pathToFile2 = './__tests__/__fixtures__/after.json';
-  const pathToResult = './__tests__/__fixtures__/result';
-  const expected = fs.readFileSync(pathToResult, 'utf8');
-  const diff = genDiff(pathToFile1, pathToFile2);
-  expect(diff).toBe(expected);
-});
+// test('differences of plain JSON', () => {
+//   const pathToFile1 = './__tests__/__fixtures__/before.json';
+//   const pathToFile2 = './__tests__/__fixtures__/after.json';
+//   const pathToResult = './__tests__/__fixtures__/result';
+//   const expected = fs.readFileSync(pathToResult, 'utf8');
+//   const diff = genDiff(pathToFile1, pathToFile2);
+//   expect(diff).toBe(expected);
+// });
 // test('differences of plain YAML', () => {
 //   const pathToFile1 = './__tests__/__fixtures__/before.yml';
 //   const pathToFile2 = './__tests__/__fixtures__/after.yml';
@@ -64,6 +64,7 @@ test('differences plainForm json', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'plain');
   expect(diff).toBe(expected);
 });
+
 test('differences plainForm yml', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.yml';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.yml';
@@ -80,7 +81,7 @@ test('differences plainForm ini', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'plain');
   expect(diff).toBe(expected);
 });
-
+/*
 // json
 test('differences jsonForm json', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.json';
