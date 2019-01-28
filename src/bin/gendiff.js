@@ -9,6 +9,7 @@ commander
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format', 'struct')
   .arguments('<firstConfig> <secondConfig>')
-  .action((firstConfig, secondConfig) => console.log(gendiff(firstConfig, secondConfig, commander.format)));
-
+  .action((firstConfig, secondConfig) => {
+    console.log(gendiff(firstConfig, secondConfig, commander.format));
+  });
 commander.parse(process.argv);
