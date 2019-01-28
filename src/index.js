@@ -29,7 +29,7 @@ const propertyActions = [
   {
     type: 'delete',
     check: (arg, obj1, obj2) => _.has(obj1, arg) && !_.has(obj2, arg),
-    process: (arg, obj1, obj2) => ({ oldValue: obj1[arg] }),
+    process: (arg, obj1) => ({ oldValue: obj1[arg] }),
   },
   {
     type: 'include',
@@ -39,7 +39,7 @@ const propertyActions = [
   {
     type: 'same',
     check: (arg, obj1, obj2) => _.has(obj1, arg) && _.has(obj2, arg) && obj1[arg] === obj2[arg],
-    process: (arg, obj1, obj2) => ({ oldValue: obj1[arg] }),
+    process: (arg, obj1) => ({ oldValue: obj1[arg] }),
   },
 ];
 
