@@ -13,7 +13,7 @@
       + follow: false
       + setting4: blah blah
       + setting5: {
-          key5: value5
+            key5: value5
         }
     }
     group1: {

@@ -29,7 +29,7 @@ import genDiff from '../src/';
 // });
 
 // default
-test('differences defaultForm JSON', () => {
+test('differences: structure form - JSON file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.json';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.json';
   const pathToResult = './__tests__/__fixtures__/resultAST';
@@ -37,8 +37,8 @@ test('differences defaultForm JSON', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'struct');
   expect(diff).toBe(expected);
 });
-/*
-test('differences defaultForm yml', () => {
+
+test('differences: structure form - YML file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.yml';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.yml';
   const pathToResult = './__tests__/__fixtures__/resultAST';
@@ -46,7 +46,7 @@ test('differences defaultForm yml', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'struct');
   expect(diff).toBe(expected);
 });
-test('differences defaultForm ini', () => {
+test('differences: structure form - INI file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.ini';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.ini';
   const pathToResult = './__tests__/__fixtures__/resultAST';
@@ -56,7 +56,7 @@ test('differences defaultForm ini', () => {
 });
 
 // plain
-test('differences plainForm json', () => {
+test('differences: plainForm - JSON file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.json';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.json';
   const pathToResult = './__tests__/__fixtures__/resultPlainAST';
@@ -65,7 +65,7 @@ test('differences plainForm json', () => {
   expect(diff).toBe(expected);
 });
 
-test('differences plainForm yml', () => {
+test('differences: plainForm - YML file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.yml';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.yml';
   const pathToResult = './__tests__/__fixtures__/resultPlainAST';
@@ -73,7 +73,7 @@ test('differences plainForm yml', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'plain');
   expect(diff).toBe(expected);
 });
-test('differences plainForm ini', () => {
+test('differences: plainForm - INI file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.ini';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.ini';
   const pathToResult = './__tests__/__fixtures__/resultPlainAST';
@@ -81,9 +81,9 @@ test('differences plainForm ini', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'plain');
   expect(diff).toBe(expected);
 });
-/*
+
 // json
-test('differences jsonForm json', () => {
+test('differences: jsonForm - JSON file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.json';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.json';
   const pathToResult = './__tests__/__fixtures__/resultJsonAST.json';
@@ -91,7 +91,7 @@ test('differences jsonForm json', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'json');
   expect(diff).toBe(expected);
 });
-test('differences jsonForm yml', () => {
+test('differences: jsonForm - YML file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.yml';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.yml';
   const pathToResult = './__tests__/__fixtures__/resultJsonAST.json';
@@ -99,7 +99,7 @@ test('differences jsonForm yml', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'json');
   expect(diff).toBe(expected);
 });
-test('differences jsonForm ini', () => {
+test('differences: jsonForm - INI file', () => {
   const pathToFile1 = './__tests__/__fixtures__/beforeAST.ini';
   const pathToFile2 = './__tests__/__fixtures__/afterAST.ini';
   const pathToResult = './__tests__/__fixtures__/resultJsonAST.json';
@@ -107,4 +107,4 @@ test('differences jsonForm ini', () => {
   const diff = genDiff(pathToFile1, pathToFile2, 'json');
   expect(diff).toBe(expected);
 });
-*/
+

@@ -2,7 +2,7 @@ const selectValue = (val) => {
   if (val instanceof Object) return ' complex value';
   return ` value '${val}'`;
 };
-const renderToPlainFormat = (ast) => {
+export default (ast) => {
   const iter = (tree, path) => tree.map((elem) => {
     const fullPathCategory = `${path ? `${path}.` : ''}${elem.name}`;
     switch (elem.type) {
@@ -17,9 +17,8 @@ const renderToPlainFormat = (ast) => {
       case 'delete':
         return `Property '${fullPathCategory}' was removed\n`;
       default:
-        return '';
+        throw new Error(`unknown type of argument of AST: ${elem.type}`);
     }
   }).join('');
   return iter(ast);
 };
-export default renderToPlainFormat;
