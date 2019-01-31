@@ -3,7 +3,8 @@
   "version": "1.0.39",
   "main": "index.js",
   "scripts": {
-    "test": "jest --color --watchAll",
+    "test-watch": "jest --color --watchAll",
+    "test": "jest --color",
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
