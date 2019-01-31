@@ -1,5 +1,5 @@
 ---
-install: travis_wait mvn install
+
 language: node_js
 node_js:
   - node
@@ -7,3 +7,5 @@ node_js:
 script:
   - make lint
   - make test
+
+install: travis_wait mvn install
