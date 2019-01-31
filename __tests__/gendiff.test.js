@@ -2,7 +2,6 @@ import fs from 'fs';
 import genDiff from '../src/';
 
 // для тестирования запуска приложения
-// /home/prisedaka/Projects/project-lvl2-s285/dist/bin/gendiff.js /home/prisedaka/Projects/project-lvl2-s285/__tests__/__fixtures__/beforeAST.json /home/prisedaka/Projects/project-lvl2-s285/__tests__/__fixtures__/afterAST.json
 // test('differences of plain JSON', () => {
 //   const pathToFile1 = './__tests__/__fixtures__/before.json';
 //   const pathToFile2 = './__tests__/__fixtures__/after.json';

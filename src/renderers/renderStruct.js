@@ -2,7 +2,8 @@ const transformObjToString = (value, numInd) => {
   const indentionInObj = '  '.repeat(numInd + 2);
   if (!(value instanceof Object) || (value instanceof Array)) return value;
   const objToString = Object.keys(value).reduce((acc, elem) => {
-    return `${acc}${indentionInObj}  ${elem}: ${value[elem]}\n`;
+    const result = `${acc}${indentionInObj}  ${elem}: ${value[elem]}\n`;
+    return result;
   }, '');
   return `{\n${objToString}${'  '.repeat(numInd + 1)}}`;
 };
